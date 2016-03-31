@@ -18,10 +18,14 @@ sandbox: install
 	pip install -r requirements.sandbox.txt
 	-rm sandbox/db.sqlite
 	sandbox/manage.py migrate
-	sandbox/manage.py loaddata sandbox/fixtures/*.json
-	sandbox/manage.py oscar_import_catalogue sandbox/fixtures/catalogue.csv
+	sandbox/manage.py loaddata sandbox/fixtures/child_products.json
+	sandbox/manage.py oscar_import_catalogue sandbox/fixtures/*.csv
 	sandbox/manage.py oscar_import_catalogue_images sandbox/fixtures/images.tar.gz
 	sandbox/manage.py oscar_populate_countries
+	sandbox/manage.py loaddata sandbox/fixtures/auth.json
+	sandbox/manage.py loaddata sandbox/fixtures/order.json
+	sandbox/manage.py clear_index --noinput
+	sandbox/manage.py update_index catalogue
 
 clean:
 	find . -type f -name "*.pyc" -delete

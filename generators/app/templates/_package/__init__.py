@@ -1,6 +1,6 @@
 import os
 
-VERSION = '0.1.0'
+from <%= packagename %>.version import __version__  # NOQA
 
 # Keep a setting for the path to the templates in case a project subclasses the
 # models and still needs to use the templates

@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
 
-from <%= packagename %> import VERSION
+from <%= packagename %> import __version__
 
 setup(
     name='<%= repo %>',
-    version=VERSION,
+    version=__version__,
     url='https://github.com/<%= user %>/<%= repo %>.git',
     author="<%- author %>",
     description=(

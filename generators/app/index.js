@@ -1,6 +1,7 @@
 'use strict';
 var file = require('file');
 var path = require('path');
+var glob = require('glob');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
@@ -65,9 +66,14 @@ module.exports = yeoman.Base.extend({
       default: kebabcase(this.appname),
     }, {
       type: 'input',
+      name: 'version',
+      message: 'Package initial version',
+      default: '0.1.0',
+    }, {
+      type: 'input',
       name: 'keywords',
       message: 'Package keywords (space separated keywords):',
-    },{
+    }, {
       type: 'input',
       name: 'description',
       message: 'What is a short description for this project?',
@@ -89,6 +95,7 @@ module.exports = yeoman.Base.extend({
       self.prompt(prompts, function(props) {
         self.user = jsonEscape(props.user);
         self.repo = jsonEscape(props.repo);
+        self.version = jsonEscape(props.version);
         self.description = jsonEscape(props.description);
         self.author = jsonEscape(props.author);
         self.packagename = props.packagename;
@@ -101,21 +108,20 @@ module.exports = yeoman.Base.extend({
 
   writing: {
     app: function() {
-      var src = this.sourceRoot();
+      var root = this.sourceRoot();
+      var files = glob.sync('**', {
+        dot: true,
+        nodir: true,
+        cwd: root,
+      });
+      var dest, src;
       var self = this;
-      file.walkSync(src, function(dirPath, dirs, files) {
-        var relativeDir = path.relative(src, dirPath);
-        files.forEach(function(filename) {
-          var target, dest;
-          target = path.join(relativeDir, filename);
-          dest = replace(target, /package/ig, self.packagename);
-          self.copy(target, dest);
-        });
+      files.forEach(function(f) {
+        src = path.join(root, f);
+        dest = path.join('', replace(f, /_package/ig, self.packagename));
+        self.copy(src, dest);
       });
     },
   },
 
-  install: function() {
-    // This.installDependencies();
-  },
 });

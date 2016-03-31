@@ -65,6 +65,10 @@ module.exports = yeoman.Base.extend({
       default: kebabcase(this.appname),
     }, {
       type: 'input',
+      name: 'keywords',
+      message: 'Package keywords (space separated keywords):',
+    },{
+      type: 'input',
       name: 'description',
       message: 'What is a short description for this project?',
     }, {
@@ -88,6 +92,7 @@ module.exports = yeoman.Base.extend({
         self.description = jsonEscape(props.description);
         self.author = jsonEscape(props.author);
         self.packagename = props.packagename;
+        self.keywords = jsonEscape(props.keywords);
         self.capitalizePackagename = capitalize(props.packagename);
         resolve();
       });
@@ -107,8 +112,6 @@ module.exports = yeoman.Base.extend({
           self.copy(target, dest);
         });
       });
-
-
     },
   },
 

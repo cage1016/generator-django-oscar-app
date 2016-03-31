@@ -1,0 +1,21 @@
+# Testing
+coverage==3.7.1
+spec==0.11.1
+WebTest==2.0.17
+django-webtest==1.7.8
+pytest==2.8.5
+pytest-cache==1.0
+pytest-cov==2.2.0
+pytest-django==2.9.1
+pytest-xdist==1.13.1
+tox==1.8.1
+coveralls==0.4.4
+
+# Misc
+flake8==2.5.1
+flake8-debugger==1.4.0
+flake8-blind-except==0.1.0
+pyprof2calltree==1.3.2
+ipdb==0.8.1
+ipython==4.0.1
+isort==4.2.2

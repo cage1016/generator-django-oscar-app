@@ -1,0 +1,30 @@
+{% extends 'dashboard/layout.html' %}
+{% load i18n %}
+{% load thumbnail %}
+{% load staticfiles %}
+{% load sorting_tags %}
+
+{% block title %}
+    {% trans "<%= capitalizePackagename %>" %} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a>
+        </li>
+        <li class="active">
+            <%= capitalizePackagename %>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block headertext %}
+    {% trans "<%= capitalizePackagename %>" %}
+{% endblock %}
+
+{% block dashboard_content %}
+
+    //TODO
+
+{% endblock dashboard_content %}

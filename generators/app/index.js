@@ -1,4 +1,3 @@
-'use strict';
 var file = require('file');
 var path = require('path');
 var glob = require('glob');
@@ -37,10 +36,12 @@ module.exports = yeoman.Base.extend({
       'Welcome to the ' + chalk.red('generator-django-oscar-app') + ' generator!'
     ));
 
+    var self=this;
     return Promise.all([
         exec('npm whoami').catch(function(e) {
-          console.error('Error getting npm user name: run `npm login`');
-          console.error(e);
+          self.log(yosay(
+            chalk.red('Error getting npm user name: run `npm login`')
+          ));
         }),
       ])
       .then(function(result) {

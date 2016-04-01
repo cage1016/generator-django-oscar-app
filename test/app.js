@@ -22,7 +22,7 @@ var getDefaultFilesForPackagePath = function (packagename) {
     packagename + '/version.py',
     packagename + '/views.py',
     'LICENSE',
-    'Makefile',
+    'makefile',
     'README.md',
     'requirements.sandbox.txt',
     'requirements.testing.txt',

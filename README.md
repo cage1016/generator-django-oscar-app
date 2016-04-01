@@ -1,4 +1,10 @@
-# generator-django-oscar-app [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-django-oscar-app
+
+[![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Dependency Status][daviddm-image]][daviddm-url]
+[![Coverage percentage][coveralls-image]][coveralls-url]
+
 > Quick build app for django-oscar
 
 ## Installation
@@ -16,12 +22,42 @@ Then generate your new project:
 yo django-oscar-app
 ```
 
-## Getting To Know Yeoman
+## Getting started
 
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
+![screenshot]
+
+```bash
+# create new folder
+$ mkdir django-oscar-hooks && cd django-oscar-hooks
+
+# create yor django-oscar app via generator
+$ yo django-oscar-app
+
+# create new virtualenv, we are using virtualenv + virtualenvwrapper here
+$ mkvirtualenv django-oscar-hooks
+New python executable in /Users/{HOME}/.virtualenvs/django-oscar-hooks/bin/python2.7
+Also creating executable in /Users/{HOME}/.virtualenvs/django-oscar-hooks/bin/python
+Please make sure you remove any previous custom paths from your /Users/{HOME}/.pydistutils.cfg file.
+Installing setuptools, pip, wheel...done.
+virtualenvwrapper.user_scripts creating /Users/{HOME}/.virtualenvs/django-oscar-hooks/bin/predeactivate
+virtualenvwrapper.user_scripts creating /Users/{HOME}/.virtualenvs/django-oscar-hooks/bin/postdeactivate
+virtualenvwrapper.user_scripts creating /Users/{HOME}/.virtualenvs/django-oscar-hooks/bin/preactivate
+virtualenvwrapper.user_scripts creating /Users/{HOME}/.virtualenvs/django-oscar-hooks/bin/postactivate
+virtualenvwrapper.user_scripts creating /Users/{HOME}/.virtualenvs/django-oscar-hooks/bin/get_env_details
+(django-oscar-hooks)
+
+# install pip packages,  create database tables and load dummy data.
+(django-oscar-hooks)$ make sandbox
+
+# run your django-oscar-hooks app
+(django-oscar-hooks)$ sh run.sh
+
+# visit http://localhost:8000/
+```
+
+Default Admin: for testing only
+- account: **superuser@example.com**
+- password: **superusercango**
 
 ## License
 
@@ -36,3 +72,4 @@ BSD-3-Clause © [Kai-Chu Chung](http://kaichu.io/)
 [daviddm-url]: https://david-dm.org/cage1016/generator-django-oscar-app
 [coveralls-image]: https://coveralls.io/repos/cage1016/generator-django-oscar-app/badge.svg
 [coveralls-url]: https://coveralls.io/r/cage1016/generator-django-oscar-app
+[screenshot]: screenshot.png

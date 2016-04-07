@@ -89,7 +89,12 @@ module.exports = yeoman.Base.extend({
       name: 'packagename',
       message: 'What is the name of this django-oscar packagename name?',
       default: getPackageName(this.appname),
-    }, ];
+    }, {
+      type: 'Boolean',
+      name: 'isPaymentPackage',
+      message: 'Is this package will to integrate with any payment?',
+      default: false
+    }];
 
     var self = this;
     return new Promise(function(resolve, reject) {
@@ -100,6 +105,7 @@ module.exports = yeoman.Base.extend({
         self.description = jsonEscape(props.description);
         self.author = jsonEscape(props.author);
         self.packagename = props.packagename;
+        self.isPaymentPackage = props.isPaymentPackage;
         self.keywords = jsonEscape(props.keywords);
         self.capitalizePackagename = capitalize(props.packagename);
         resolve();
@@ -117,7 +123,21 @@ module.exports = yeoman.Base.extend({
       });
       var dest, src;
       var self = this;
-      files.forEach(function(f) {
+      var isPaymentPackageExtraFiles = [
+        '_package/gateway.py',
+        '_package/facade.py',
+        '_package/templates/_package/preview.html',
+        'sandbox/apps/checkout/__init__.py',
+        'sandbox/apps/checkout/app.py',
+        'sandbox/apps/checkout/config.py',
+        'sandbox/apps/checkout/models.py',
+        'sandbox/apps/checkout/views.py',
+        'sandbox/templates/checkout/payment_details.html',
+      ];
+      var paymentFilter = function(f){
+        return self.isPaymentPackage ? true : isPaymentPackageExtraFiles.indexOf(f) === -1;
+      };
+      files.filter(paymentFilter).forEach(function(f) {
         src = path.join(root, f);
         dest = path.join('', replace(f, /_package/ig, self.packagename));
         self.copy(src, dest);

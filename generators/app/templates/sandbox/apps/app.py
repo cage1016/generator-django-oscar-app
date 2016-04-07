@@ -1,7 +1,15 @@
 from oscar.app import Shop
 
-class <%= packagename %>Shop(Shop):
+<% if (isPaymentPackage) { %>
+from apps.checkout.app import application as checkout_app
+
+
+class <%= capitalizePackagename %>Shop(Shop):
+    checkout_app = checkout_app
+<%}else{%>
+class <%= capitalizePackagename %>Shop(Shop):
     pass
 
+<%}%>
 
-application = <%= packagename %>Shop()
+application = <%= capitalizePackagename %>Shop()

@@ -4,13 +4,14 @@ from django.contrib import admin
 from django.conf.urls.static import static
 
 from <%= packagename %>.dashboard.app import application as <%= packagename %>_dashboard
-from apps.app import application
+<% if (isPaymentPackage) { %>from apps.app import application<%}else{%>from apps.app import application<%}%>
 
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^admin/', include(admin.site.urls)),
+    <% if (isPaymentPackage) { %>url(r'^checkout/<%= packagename %>/', include('<%= packagename %>.urls')),<%}%>
     url(r'^dashboard/<%= packagename %>/', include(<%= packagename %>_dashboard.urls)),
     url(r'', include(application.urls)),
 ]

@@ -1,0 +1,18 @@
+{% extends 'oscar/checkout/payment_details.html' %}
+{% load url from future %}
+{% load i18n %}
+
+{% block checkout_title %}
+  <h2 class="border h1">{% trans "Enter payment details" %}</h2>
+{% endblock %}
+
+{% block payment_details %}
+    <div class="well">
+        <div class="sub-header">
+            <h3>{% trans "<%= capitalizePackagename %>" %}</h3>
+        </div>
+        <div style="overflow:auto">
+          <a href="{% url '<%= packagename %>-direct-payment' %}" title="{% trans "Pay with <%= capitalizePackagename %>" %}">
+          <%= capitalizePackagename %></a>&nbsp;</div>
+    </div>
+{% endblock %}

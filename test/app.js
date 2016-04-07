@@ -21,6 +21,7 @@ var getDefaultFilesForPackagePath = function (packagename) {
     packagename + '/urls.py',
     packagename + '/version.py',
     packagename + '/views.py',
+    '.gitignore',
     'LICENSE',
     'makefile',
     'README.md',

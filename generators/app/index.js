@@ -125,4 +125,15 @@ module.exports = yeoman.Base.extend({
     },
   },
 
+  end: {
+    git: function() {
+      var repo = 'https://github.com/' + this.user + '/' + this.repo + '.git';
+      this.spawnCommandSync('git', ['init']);
+      this.spawnCommandSync('git', ['remote', 'add', 'origin', repo]);
+      this.spawnCommandSync('git', ['add', '--all']);
+      this.spawnCommandSync('git', ['commit', '-m', '"initial commit from django-oscar-app generator"']);
+      this.log(chalk.green('\n  git init done.'));
+    }
+  }
+
 });

@@ -4,6 +4,7 @@
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
 [![Coverage percentage][coveralls-image]][coveralls-url]
+[![NPM Downloads][downloads-image]][downloads-url]
 
 > Quick build app for django-oscar
 
@@ -26,14 +27,21 @@ yo django-oscar-app
 
 ![screenshot]
 
+crete new folder
+
 ```bash
-# create new folder
 $ mkdir django-oscar-hooks && cd django-oscar-hooks
+```
 
-# create yor django-oscar app via generator
+create django-oscar app via generator
+
+```bash
 $ yo django-oscar-app
+```
 
-# create new virtualenv, we are using virtualenv + virtualenvwrapper here
+create new virtualenv, we are using virtualenv + virtualenvwrapper here
+
+```bash
 $ mkvirtualenv django-oscar-hooks
 New python executable in /Users/{HOME}/.virtualenvs/django-oscar-hooks/bin/python2.7
 Also creating executable in /Users/{HOME}/.virtualenvs/django-oscar-hooks/bin/python
@@ -45,19 +53,31 @@ virtualenvwrapper.user_scripts creating /Users/{HOME}/.virtualenvs/django-oscar-
 virtualenvwrapper.user_scripts creating /Users/{HOME}/.virtualenvs/django-oscar-hooks/bin/postactivate
 virtualenvwrapper.user_scripts creating /Users/{HOME}/.virtualenvs/django-oscar-hooks/bin/get_env_details
 (django-oscar-hooks)
-
-# install pip packages,  create database tables and load dummy data.
-(django-oscar-hooks)$ make sandbox
-
-# run your django-oscar-hooks app
-(django-oscar-hooks)$ sh run.sh
-
-# visit http://localhost:8000/
 ```
+
+install pip packages,  create database tables and load dummy data.
+
+```bash
+(django-oscar-hooks)$ make sandbox
+```
+
+run your django-oscar-hooks app
+
+```bash
+(django-oscar-hooks)$ sh run.sh
+```
+
+visit http://localhost:8000/
+
 
 Default Admin: for testing only
 - account: **superuser@example.com**
 - password: **superusercango**
+
+## Change Logs
+
+0.2.0
+- add payment package type
 
 ## License
 
@@ -72,4 +92,6 @@ BSD-3-Clause © [Kai-Chu Chung](http://kaichu.io/)
 [daviddm-url]: https://david-dm.org/cage1016/generator-django-oscar-app
 [coveralls-image]: https://coveralls.io/repos/cage1016/generator-django-oscar-app/badge.svg
 [coveralls-url]: https://coveralls.io/r/cage1016/generator-django-oscar-app
-[screenshot]: screenshot.png
+[screenshot]: screenshot-2.png
+[downloads-image]: https://img.shields.io/npm/dm/generator-django-oscar-app.svg
+[downloads-url]: https://npmjs.org/package/generator-django-oscar-app

@@ -10,7 +10,7 @@ setup(
     author='<%- author %>',
     description=('<%- description %>'),
     long_description=open('README.md').read(),
-    keywords='Oscar,<%= keywords %>',
+    keywords='<%= keywords %>',
     license=open('LICENSE').read(),
     platforms=['Mac'],
     packages=find_packages(exclude=['sandbox*', 'tests*']),

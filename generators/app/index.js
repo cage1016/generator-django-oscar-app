@@ -73,7 +73,8 @@ module.exports = yeoman.Base.extend({
     }, {
       type: 'input',
       name: 'keywords',
-      message: 'Package keywords (space separated keywords):',
+      message: 'Package keywords (comma separated keywords):',
+      default: 'Oscar,django'
     }, {
       type: 'input',
       name: 'description',
@@ -92,7 +93,7 @@ module.exports = yeoman.Base.extend({
     }, {
       type: 'Boolean',
       name: 'isPaymentPackage',
-      message: 'Is this package will to integrate with any payment?',
+      message: 'Will package integrate with any payment?',
       default: false
     }];
 

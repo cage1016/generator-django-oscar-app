@@ -127,6 +127,8 @@ module.exports = yeoman.Base.extend({
         '_package/gateway.py',
         '_package/facade.py',
         '_package/templates/_package/preview.html',
+        'sandbox/apps/__init__.py',
+        'sandbox/apps/app.py',
         'sandbox/apps/checkout/__init__.py',
         'sandbox/apps/checkout/app.py',
         'sandbox/apps/checkout/config.py',

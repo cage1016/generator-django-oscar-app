@@ -1,5 +1,4 @@
-<% if (isPaymentPackage) { %>
-from django.views.generic import RedirectView, View
+<% if (isPaymentPackage) { %>from django.views.generic import RedirectView, View
 
 import oscar
 from oscar.core.loading import get_class, get_model
@@ -39,6 +38,5 @@ class SuccessResponseView(PaymentDetailsView):
 
 class ShippingOptionsView(View):
     pass
-<%}else{%>
-# Create your views here.
+<%}else{%># Create your views here.
 <%}%>

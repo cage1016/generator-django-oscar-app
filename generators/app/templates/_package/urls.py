@@ -1,5 +1,4 @@
-<% if (isPaymentPackage) { %>
-from django.conf.urls import *
+<% if (isPaymentPackage) { %>from django.conf.urls import *
 from django.views.decorators.csrf import csrf_exempt
 
 from <%= packagename %> import views
@@ -21,8 +20,7 @@ urlpatterns = patterns('',
     url(r'^payment/', views.RedirectView.as_view(as_payment_method=True),
         name='<%= packagename %>-direct-payment'),
 )
-<%}else{%>
-from <%= packagename %> import views
+<%}else{%>from <%= packagename %> import views
 
 # create your urls here.
 <%}%>

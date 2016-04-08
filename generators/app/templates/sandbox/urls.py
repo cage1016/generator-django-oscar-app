@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 
 from <%= packagename %>.dashboard.app import application as <%= packagename %>_dashboard
-<% if (isPaymentPackage) { %>from apps.app import application<%}else{%>from apps.app import application<%}%>
+<% if (isPaymentPackage) { %>from apps.app import application<%}else{%>from oscar.app import application<%}%>
 
 admin.autodiscover()
 

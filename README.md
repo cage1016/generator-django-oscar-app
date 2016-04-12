@@ -76,6 +76,10 @@ Default Admin: for testing only
 
 ## Change Logs
 
+0.2.2
+- auto create project folder
+- add lincese generator 
+
 0.2.0
 - add payment package type
 
@@ -92,6 +96,6 @@ BSD-3-Clause © [Kai-Chu Chung](http://kaichu.io/)
 [daviddm-url]: https://david-dm.org/cage1016/generator-django-oscar-app
 [coveralls-image]: https://coveralls.io/repos/cage1016/generator-django-oscar-app/badge.svg
 [coveralls-url]: https://coveralls.io/r/cage1016/generator-django-oscar-app
-[screenshot]: screenshot-2.gif
+[screenshot]: screenshot-3.gif
 [downloads-image]: https://img.shields.io/npm/dm/generator-django-oscar-app.svg
 [downloads-url]: https://npmjs.org/package/generator-django-oscar-app

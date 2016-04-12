@@ -13,6 +13,9 @@ var trim = require('lodash.trim');
 var jsesc = require('jsesc');
 var exec = Promise.promisify(require('child_process').exec);
 var gitConfig = require('git-config');
+var askName = require('inquirer-npm-name');
+var _ = require('lodash');
+var mkdirp = require('mkdirp');
 
 function jsonEscape(str) {
   return jsesc(str, {
@@ -20,92 +23,104 @@ function jsonEscape(str) {
   });
 }
 
-function getPackageName(appname) {
-  var s = appname.split(' ');
-  return s.length > 1 ? s[s.length - 1] : appname;
+function getPackageName(repo) {
+  return _.last(repo.split('-'));
+}
+
+function makeDjangoOscarPackageName(name) {
+  name = _.kebabCase(name);
+  name = name.indexOf('django-oscar-') === 0 ? name : 'django-oscar-' + name;
+  return name;
 }
 
 module.exports = yeoman.Base.extend({
   initializing: function() {
     this.pkg = require('../../package.json');
+    this.props = {};
   },
 
-  prompting: function() {
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      'Welcome to the ' + chalk.red('generator-django-oscar-app') + ' generator!'
-    ));
+  prompting: {
+    askForModuleName: function () {
+      var done = this.async();
 
-    var self=this;
-    return Promise.all([
-        exec('npm whoami').catch(function(e) {
-          self.log(yosay(
-            chalk.red('Error getting npm user name: run `npm login`')
-          ));
-        }),
-      ])
-      .then(function(result) {
-        result = result ? result : {};
-        this.username = trim(result[0]);
-        return this._showPrompts();
+      this.log(yosay(
+        'Welcome to the ' + chalk.red('generator-django-oscar-app') + ' generator!'
+      ));
+
+      askName({
+        name: 'repo',
+        message: 'What is your django repository/project name',
+        default: makeDjangoOscarPackageName(path.basename(process.cwd())),
+        filter: makeDjangoOscarPackageName,
+        validate: function (str) {
+          return str.length > 0;
+        }
+      }, this, function (repo) {
+        this.props.repo = repo;
+
+        if (path.basename(this.destinationPath()) !== this.props.repo) {
+          this.log(
+            'Your django oscar app must be inside a folder named ' + chalk.green(this.props.repo) + '\n' +
+            'I\'ll automatically create this folder.'
+          );
+          mkdirp(this.props.repo);
+          this.destinationRoot(this.destinationPath(this.props.repo));
+        }
+
+        done();
       }.bind(this));
-  },
+    },
 
-  _showPrompts: function() {
-    var config = gitConfig.sync();
-    config.user = config.user ? config.user : {};
-    var prompts = [{
-      type: 'input',
-      name: 'user',
-      message: 'What is the Github username/organization for this project?',
-      default: this.username,
-      store: true,
-    }, {
-      type: 'input',
-      name: 'repo',
-      message: 'What is the repository/project name? (ex: django-oscar-paypal)',
-      default: kebabcase(this.appname),
-    }, {
-      type: 'input',
-      name: 'version',
-      message: 'Package initial version',
-      default: '0.1.0',
-    }, {
-      type: 'input',
-      name: 'keywords',
-      message: 'Package keywords (comma split keywords):',
-      default: 'Oscar,django'
-    }, {
-      type: 'input',
-      name: 'description',
-      message: 'What is a short description for this project?',
-    }, {
-      type: 'input',
-      name: 'author',
-      message: 'Who is the author of this project?',
-      default: config.user.name + ' <' + config.user.email + '>',
-      store: true,
-    }, {
-      name: 'authorUrl',
-      message: 'Author\'s Homepage',
-      store: true
-    }, {
-      type: 'input',
-      name: 'packagename',
-      message: 'What is the name of this django-oscar packagename name?',
-      default: getPackageName(this.appname),
-    }, {
-      type: 'Boolean',
-      name: 'isPaymentPackage',
-      message: 'Will package integrate with any payment?',
-      default: false
-    }];
+    askFor: function(){
+      var done = this.async();
+      var config = gitConfig.sync();
+      config.user = config.user ? config.user : {};
+      var prompts = [{
+        type: 'input',
+        name: 'user',
+        message: 'What is the Github username/organization for this project?',
+        default: this.username,
+        store: true,
+      }, {
+        type: 'input',
+        name: 'version',
+        message: 'Package initial version',
+        default: '0.1.0',
+      }, {
+        type: 'input',
+        name: 'keywords',
+        message: 'Package keywords (comma split keywords):',
+        default: 'Oscar,django'
+      }, {
+        type: 'input',
+        name: 'description',
+        message: 'What is a short description for this project?',
+      }, {
+        type: 'input',
+        name: 'author',
+        message: 'Who is the author of this project?',
+        default: config.user.name + ' <' + config.user.email + '>',
+        store: true,
+      }, {
+        name: 'authorUrl',
+        message: 'Author\'s Homepage',
+        store: true
+      }, {
+        type: 'input',
+        name: 'packagename',
+        message: 'What is the name of this django-oscar packagename name?',
+        default: getPackageName(this.props.repo),
+      }, {
+        type: 'Boolean',
+        name: 'isPaymentPackage',
+        message: 'Will package integrate with any payment?',
+        default: false
+      }];
 
-    var self = this;
-    return new Promise(function(resolve, reject) {
-      self.prompt(prompts, function(props) {
+      var self=this;
+      this.prompt(prompts, function(props) {
         self.user = jsonEscape(props.user);
-        self.repo = jsonEscape(props.repo);
+        self.repo = jsonEscape(self.props.repo);
         self.version = jsonEscape(props.version);
         self.description = jsonEscape(props.description);
         self.author = jsonEscape(props.author);
@@ -114,9 +129,9 @@ module.exports = yeoman.Base.extend({
         self.isPaymentPackage = props.isPaymentPackage;
         self.keywords = jsonEscape(props.keywords);
         self.capitalizePackagename = capitalize(props.packagename);
-        resolve();
+        done();
       });
-    });
+    }
   },
 
   default: function () {

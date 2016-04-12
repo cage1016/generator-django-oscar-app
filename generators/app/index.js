@@ -73,7 +73,7 @@ module.exports = yeoman.Base.extend({
     }, {
       type: 'input',
       name: 'keywords',
-      message: 'Package keywords (comma separated keywords):',
+      message: 'Package keywords (comma split keywords):',
       default: 'Oscar,django'
     }, {
       type: 'input',
@@ -85,6 +85,10 @@ module.exports = yeoman.Base.extend({
       message: 'Who is the author of this project?',
       default: config.user.name + ' <' + config.user.email + '>',
       store: true,
+    }, {
+      name: 'authorUrl',
+      message: 'Author\'s Homepage',
+      store: true
     }, {
       type: 'input',
       name: 'packagename',
@@ -105,12 +109,25 @@ module.exports = yeoman.Base.extend({
         self.version = jsonEscape(props.version);
         self.description = jsonEscape(props.description);
         self.author = jsonEscape(props.author);
+        self.authorUrl = jsonEscape(props.authorUrl);
         self.packagename = props.packagename;
         self.isPaymentPackage = props.isPaymentPackage;
         self.keywords = jsonEscape(props.keywords);
         self.capitalizePackagename = capitalize(props.packagename);
         resolve();
       });
+    });
+  },
+
+  default: function () {
+    this.composeWith('license', {
+      options: {
+        name: this.user.name,
+        email: this.user.email,
+        website: this.authorUrl
+      }
+    }, {
+      local: require.resolve('generator-license/app')
     });
   },
 

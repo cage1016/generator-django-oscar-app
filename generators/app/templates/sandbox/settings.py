@@ -47,6 +47,7 @@ gettext_noop = lambda s: s
 LANGUAGES = (
     ('en-gb', gettext_noop('British English')),
     ('zh-cn', gettext_noop('Simplified Chinese')),
+    ('zh-tw', gettext_noop('Taiwan Chinese')),
     ('nl', gettext_noop('Dutch')),
     ('it', gettext_noop('Italian')),
     ('pl', gettext_noop('Polish')),
@@ -118,15 +119,20 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # Allow languages to be selected
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    # Ensure a valid basket is added to the request instance for every request
     'oscar.apps.basket.middleware.BasketMiddleware',
+    # Enable the ProfileMiddleware, then add ?cprofile to any
+    # URL path to print out profile details
+    #'oscar.profiling.middleware.ProfileMiddleware',
 )
 
 INTERNAL_IPS = ('127.0.0.1',)

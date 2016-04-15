@@ -27,12 +27,6 @@ yo django-oscar-app
 
 ![screenshot]
 
-crete new folder
-
-```bash
-$ mkdir django-oscar-hooks && cd django-oscar-hooks
-```
-
 create django-oscar app via generator
 
 ```bash
@@ -76,9 +70,12 @@ Default Admin: for testing only
 
 ## Change Logs
 
+0.2.3
+- fixed sandbox i18n does not work
+
 0.2.2
 - auto create project folder
-- add lincese generator 
+- add lincese generator
 
 0.2.0
 - add payment package type

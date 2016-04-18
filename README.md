@@ -70,6 +70,11 @@ Default Admin: for testing only
 
 ## Change Logs
 
+0.2.4
+- fixed tests/config.py string quotation marks incomplete
+- requirements.testing add mock, model-mommy, six packages
+- requirements.sandbox remove django-oscar, django packages. add pycountry package version
+
 0.2.3
 - fixed sandbox i18n does not work
 

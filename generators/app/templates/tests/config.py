@@ -9,4 +9,4 @@ if __name__ == '__main__':
     location = lambda x: os.path.join(
             os.path.dirname(os.path.realpath(__file__)), x)
 
-    sys.path.append(location('../<%= packagename %>))
+    sys.path.append(location('../<%= packagename %>'))

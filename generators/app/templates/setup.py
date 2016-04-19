@@ -16,10 +16,9 @@ setup(
     packages=find_packages(exclude=['sandbox*', 'tests*']),
     include_package_data=True,
     install_requires=[
+        'django-oscar>=1.1'
     ],
-    extras_require={
-        'oscar': ["django-oscar>=1.1"]
-    },
+    extras_require={},
     # See http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         'Development Status :: 1 - Dev',

@@ -70,6 +70,10 @@ Default Admin: for testing only
 
 ## Change Logs
 
+0.2.5
+- fixed code generated test `tests/_site/urls.py` missing
+- fixed `make sandbox` fail caused requirements modify @0.2.4
+
 0.2.4
 - fixed tests/config.py string quotation marks incomplete
 - requirements.testing add mock, model-mommy, six packages

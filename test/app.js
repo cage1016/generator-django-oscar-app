@@ -45,6 +45,7 @@ var getDefaultFilesForPackagePath = function (packagename, isPaymentPackage) {
     'setup.py',
     'tests/__init__.py',
     'tests/_site/__init__.py',
+    'tests/_site/urls.py',
     'tests/config.py',
     'tests/conftest.py',
     'tests/functional/__init__.py',

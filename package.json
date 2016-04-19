@@ -1,6 +1,6 @@
 {
   "name": "generator-django-oscar-app",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Quick build app for django-oscar",
   "homepage": "https://github.com/cage1016/generator-django-oscar-app",
   "author": {

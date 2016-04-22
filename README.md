@@ -61,6 +61,22 @@ run your django-oscar-hooks app
 (django-oscar-hooks)$ sh run.sh
 ```
 
+run test
+
+```bash
+(django-oscar-hooks)$ make test
+./runtests.py
+=============================================== test session starts ===============================================
+platform darwin -- Python 2.7.10, pytest-2.8.5, py-1.4.31, pluggy-0.3.1
+django settings: tests.settings (from environment variable)
+rootdir: /Users/cage/Documents/yo-generators/123/django-oscar-licenses, inifile:
+plugins: cov-2.2.0, django-2.9.1, xdist-1.13.1
+gw0 [2] / gw1 [2] / gw2 [2] / gw3 [2] / gw4 [2] / gw5 [2] / gw6 [2] / gw7 [2]
+scheduling tests via LoadScheduling
+..
+============================================ 2 passed in 2.51 seconds =============================================
+```
+
 visit http://localhost:8000/
 
 
@@ -69,6 +85,10 @@ Default Admin: for testing only
 - password: **superusercango**
 
 ## Change Logs
+
+0.3.0
+- add `unit/dashboard` test auto generated
+- modified `tests/_site/urls` to add package dashboard url
 
 0.2.5
 - fixed code generated test `tests/_site/urls.py` missing
@@ -84,7 +104,7 @@ Default Admin: for testing only
 
 0.2.2
 - auto create project folder
-- add lincese generator
+- add license generator
 
 0.2.0
 - add payment package type

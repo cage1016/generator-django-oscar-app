@@ -51,6 +51,8 @@ var getDefaultFilesForPackagePath = function (packagename, isPaymentPackage) {
     'tests/functional/__init__.py',
     'tests/settings.py',
     'tests/unit/__init__.py',
+    'tests/unit/dashboard/__init__.py',
+    'tests/unit/dashboard/test_' + packagename + '_dashboard.py',
   ];
 
   var isPaymentPackageFiles = [
@@ -186,6 +188,21 @@ describe('generator-django-oscar-app', function () {
       assert.fileContent('README.md','[coveralls-url]: https://coveralls.io/r/cage1016/django-oscar-hooks');
       assert.fileContent('README.md','[pypi-image]: https://img.shields.io/pypi/v/django-oscar-hooks.svg');
       assert.fileContent('README.md','[pypi-url]: https://pypi.python.org/pypi/django-oscar-hooks/');
+    });
+
+    it('fill all test_hooks_dashboard.py content', function(){
+      assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','from django.core.urlresolvers import reverse');
+      assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','from django.core.urlresolvers import resolve');
+      assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','from oscar.test.testcases import WebTestCase');
+      assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','from hooks.dashboard.views import HooksListView');
+      assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','class TestHooksDashboardIndexForStaffUser(WebTestCase):');
+      assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','is_staff = True');
+      assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','def test_hooks_dashboard_url_resolve(self):');
+      assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','found = resolve(reverse(\'hooks-list\'))');
+      assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','self.assertTrue(found.func.func_name, HooksListView.__name__)');
+      assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','def test_hooks_dashboard_view_load(self):');
+      assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','response = self.get(reverse(\'hooks-list\'))');
+      assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','self.assertTemplateUsed(response, \'hooks/dashboard/hooks_list.html\')');
     });
   });
 });

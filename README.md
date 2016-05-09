@@ -77,14 +77,58 @@ scheduling tests via LoadScheduling
 ============================================ 2 passed in 2.51 seconds =============================================
 ```
 
-visit http://localhost:8000/
-
+visit [http://localhost:8000/](http://localhost:8000/)
 
 Default Admin: for testing only
 - account: **superuser@example.com**
 - password: **superusercango**
 
+build sphinx docs
+
+```
+(django-oscar-hooks)$ make build_docs
+
+// html page with generated at docs/_build/html/
+// pdf file with generated at docs/_build/pdf/
+```
+
+django-oscar-app yeoman generator will use `VL-Gothic-Regular.ttf` & `VL-PGothic-Regular.ttf` fonts for **rst2pdf** packages default. Please download [VLGothic-20091202.zip](http://jaist.dl.sourceforge.jp/vlgothic/44715/VLGothic-20091202.zip) and install it. If you want to customize pdf fonts as you needs. You need to make your own `.style` for **rst2pdf** and modify `conf.py`
+
+__docs/conf.py__
+
+copy and replace your need. ex: tw.style
+
+```python
+# L320
+...
+# A comma-separated list of custom stylesheets. Example:
+# pdf_stylesheets = ['kerning','a4', 'custom']
+pdf_stylesheets = ['kerning','a4', '<your-dot-style-file-name>']
+
+# A list of folders to search for stylesheets. Example:
+pdf_style_path = ['.', '_styles', 'docs']
+
+# Create a compressed PDF
+# Use True/False or 1/0
+# Example: compressed=True
+#pdf_compressed = False
+
+# A colon-separated list of folders to search for fonts. Example:
+# pdf_font_path = ['/Users/' + os.environ.get('USER') + '/Library/Fonts']
+pdf_font_path = ['<custom-fonts-you-installed>']
+
+# Language to be used for hyphenation support
+# pdf_language = "zh_TW"
+pdf_language = "<your-language>"
+
+```
+
 ## Change Logs
+
+0.4.0
+- add `Sphinx` docs skeleton generated
+  - html
+  - pdf
 
 0.3.0
 - add `unit/dashboard` test auto generated

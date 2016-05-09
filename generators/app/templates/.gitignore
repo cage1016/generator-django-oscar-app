@@ -5,7 +5,7 @@
 # Packaging
 dist
 build/
-django_oscar_paypal.egg-info/
+<%= snakeCaseRepo%>.egg-info/
 docs/_build
 
 # Testing

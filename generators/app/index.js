@@ -16,6 +16,7 @@ var gitConfig = require('git-config');
 var askName = require('inquirer-npm-name');
 var _ = require('lodash');
 var mkdirp = require('mkdirp');
+var snakeCase = require('snake-case');
 
 function jsonEscape(str) {
   return jsesc(str, {
@@ -134,6 +135,7 @@ module.exports = yeoman.Base.extend({
       this.prompt(prompts, function(props) {
         self.user = jsonEscape(props.user);
         self.repo = jsonEscape(self.props.repo);
+        self.snakeCaseRepo = snakeCase(self.props.repo);
         self.version = jsonEscape(props.version);
         self.description = jsonEscape(props.description);
         self.author = jsonEscape(props.author);

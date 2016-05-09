@@ -231,5 +231,9 @@ describe('generator-django-oscar-app', function () {
     it('fill all docs/index.rst content', function(){
       assert.fileContent('docs/index.rst','hooks');
     });
+
+    it('fill all .gitignore content', function(){
+      assert.fileContent('.gitignore', 'django_oscar_hooks.egg-info/');
+    });
   });
 });

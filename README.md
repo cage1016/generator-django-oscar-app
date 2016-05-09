@@ -129,6 +129,7 @@ pdf_language = "<your-language>"
 - add `Sphinx` docs skeleton generated
   - html
   - pdf
+- fixed `.gitignore` egg info pattern
 
 0.3.0
 - add `unit/dashboard` test auto generated

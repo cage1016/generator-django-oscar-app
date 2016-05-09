@@ -53,6 +53,13 @@ var getDefaultFilesForPackagePath = function (packagename, isPaymentPackage) {
     'tests/unit/__init__.py',
     'tests/unit/dashboard/__init__.py',
     'tests/unit/dashboard/test_' + packagename + '_dashboard.py',
+    'docs/_static',
+    'docs/conf.py',
+    'docs/custom.style',
+    'docs/custom.style.copy',
+    'docs/index.rst',
+    'docs/make.bat',
+    'docs/Makefile',
   ];
 
   var isPaymentPackageFiles = [
@@ -203,6 +210,26 @@ describe('generator-django-oscar-app', function () {
       assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','def test_hooks_dashboard_view_load(self):');
       assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','response = self.get(reverse(\'hooks-list\'))');
       assert.fileContent('tests/unit/dashboard/test_hooks_dashboard.py','self.assertTemplateUsed(response, \'hooks/dashboard/hooks_list.html\')');
+    });
+
+    it('fill all docs/conf.py content', function(){
+      assert.fileContent('docs/conf.py', '# hooks documentation build configuration file, created by');
+      assert.fileContent('docs/conf.py', 'project = u\'hooks\'');
+      assert.fileContent('docs/conf.py', 'copyright = str(date.today().year) + u\', Kai-Chu Chung\'');
+      assert.fileContent('docs/conf.py', 'author = u\'Kai-Chu Chung\'');
+      assert.fileContent('docs/conf.py', 'version = \'0.1.0\'');
+      assert.fileContent('docs/conf.py', 'release = \'0.1.0\'');
+      assert.fileContent('docs/conf.py', 'htmlhelp_basename = \'hooksdoc\'');
+      assert.fileContent('docs/conf.py', '  (\'index\', \'hooks.tex\', u\'hooks Documentation\',');
+      assert.fileContent('docs/conf.py', '   u\'hooks\', \'manual\'),');
+      assert.fileContent('docs/conf.py', '    (master_doc, \'hooks\', u\'hooks Documentation\',');
+      assert.fileContent('docs/conf.py', '  (master_doc, \'hooks\', u\'hooks Documentation\',');
+      assert.fileContent('docs/conf.py', '   author, \'hooks\', \'One line description of project.\',');
+      assert.fileContent('docs/conf.py', '    (\'index\', u\'hooks\', u\'django-oscar-hooks\', u\'Kai-Chu Chung\'),');
+    });
+
+    it('fill all docs/index.rst content', function(){
+      assert.fileContent('docs/index.rst','hooks');
     });
   });
 });

@@ -27,6 +27,19 @@ function getPackageName(repo) {
   return _.last(repo.split('-'));
 }
 
+function getAuthorName(author) {
+  if (_.indexOf(author, '<') > 0) {
+    var buf = _.split(author, '<');
+    if (buf.length) {
+      return _.trim(buf[0]);
+    } else {
+      return author;
+    }
+  } else {
+    return author
+  }
+}
+
 function makeDjangoOscarPackageName(name) {
   name = _.kebabCase(name);
   name = name.indexOf('django-oscar-') === 0 ? name : 'django-oscar-' + name;
@@ -125,6 +138,7 @@ module.exports = yeoman.Base.extend({
         self.description = jsonEscape(props.description);
         self.author = jsonEscape(props.author);
         self.authorUrl = jsonEscape(props.authorUrl);
+        self.authorName = getAuthorName(props.author);
         self.packagename = props.packagename;
         self.isPaymentPackage = props.isPaymentPackage;
         self.keywords = jsonEscape(props.keywords);
@@ -178,6 +192,9 @@ module.exports = yeoman.Base.extend({
         self.copy(src, dest);
       });
     },
+    docsStaticFolder: function(){
+      this.mkdir('docs/_static');
+    }
   },
 
   end: {

@@ -8,3 +8,9 @@ pycountry==1.20
 django-debug-toolbar==1.4.0
 django-debug-toolbar-template-timings==0.6.4
 django-jsonfield==0.9.15
+
+# Docks
+Sphinx==1.3.1
+sphinxcontrib-napoleon==0.2.8
+sphinx-rtd-theme==0.1.9
+rst2pdf==0.93

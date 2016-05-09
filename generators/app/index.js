@@ -37,7 +37,7 @@ function getAuthorName(author) {
       return author;
     }
   } else {
-    return author
+    return author;
   }
 }
 

@@ -125,6 +125,9 @@ pdf_language = "<your-language>"
 
 ## Change Logs
 
+0.4.1
+- fixed sandbox TemplateDoesNotExist error 
+
 0.4.0
 - add `Sphinx` docs skeleton generated
   - html
